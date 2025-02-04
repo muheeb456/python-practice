@@ -1,10 +1,14 @@
-class Student:
-    def __init__(self,name,major):
+class Person:
+    def __init__(self,name):
         if not name:
             raise ValueError("name must be proveded")
+        self.name = name
+
+class Student(Person):
+    def __init__(self,name,major):
+        super().__init__(name)
         if major not in ["CSE", "Mech", "EEE", "AIDS", "CE", "IT"]:
             raise ValueError("Invalid Major")
-        self.name = name
         self.major = major
 
     def __str__(self):
@@ -16,13 +20,11 @@ class Student:
         major = input("Enter major: ")
         return cls(name,major) 
             
-class Professor():
+class Professor(Person):
     def __init__(self,name,subject):
-        if not name:
-            raise ValueError("name must be proveded")
+        super().__init__(name)
         if not subject:
             raise ValueError("subject must be proveded")
-        self.name = name
         self.subject = subject
     
     def __str__(self):
