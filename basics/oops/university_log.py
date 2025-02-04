@@ -1,16 +1,33 @@
 class Person:
     def __init__(self,name):
+        self.name = name    # calls @name.setter method automatically
+    
+    @property
+    def name(self):
+        return self._name 
+    
+    @name.setter
+    def name(self,name):
         if not name:
             raise ValueError("name must be proveded")
-        self.name = name
+        self._name = name
+
 
 class Student(Person):
     def __init__(self,name,major):
         super().__init__(name)
-        if major not in ["CSE", "Mech", "EEE", "AIDS", "CE", "IT"]:
-            raise ValueError("Invalid Major")
         self.major = major
 
+    @property
+    def major(self):
+        return self._major
+    
+    @major.setter
+    def major(self,major):
+        if major not in ["CSE", "Mech", "EEE", "AIDS", "CE", "IT"]:
+            raise ValueError("Invalid Major")
+        self._major = major
+    
     def __str__(self):
         return f"[name : {self.name}, major : {self.major}]"
 
@@ -23,10 +40,18 @@ class Student(Person):
 class Professor(Person):
     def __init__(self,name,subject):
         super().__init__(name)
-        if not subject:
-            raise ValueError("subject must be proveded")
         self.subject = subject
     
+    @property
+    def subject(self):
+        return self._subject
+    
+    @subject.setter
+    def subject(self,subject):
+        if not subject:
+            raise ValueError("subject must be proveded")
+        self._subject = subject
+
     def __str__(self):
         return f"{self.name} is a professor in {self.subject}" 
     
